@@ -17,14 +17,16 @@ ngOnInit(): void {
   //Add 'implements OnInit' to the class.
    this.titleService.setTitle('Coming Soon | Onestopformatter.dev');
 
-   this.metaService.addTags([
-      { name: 'description', content: 'We are launching soon! Stay tuned for amazing tools and features on Onestopformatter.' },
-      { name: 'robots', content: 'index, follow' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'author', content: 'Onestopformatter Team' },
-      { name: 'keywords', content: 'coming soon, developer tools, json viewer, utilities, productivity, Onestopformatter' },
+this.metaService.addTags([
+  { property: 'og:title', content: 'Coming Soon | Onestopformatter.dev' },
+  { property: 'og:description', content: 'We are launching soon!' },
+  { property: 'og:url', content: 'https://onestopformatter.dev' },
+  { property: 'og:type', content: 'website' },
+  { name: 'twitter:card', content: 'summary_large_image' },
+  { name: 'twitter:title', content: 'Coming Soon | Onestopformatter.dev' },
+  { name: 'twitter:description', content: 'We are launching soon!' },
+]);
 
-    ]);
   }
 logClick() {
   console.log("logClick")
