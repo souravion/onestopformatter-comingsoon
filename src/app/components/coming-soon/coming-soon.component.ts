@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Analytics, logEvent } from '@angular/fire/analytics';
 import { Meta, Title } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-coming-soon',
@@ -8,7 +10,8 @@ import { Meta, Title } from '@angular/platform-browser';
   styleUrl: './coming-soon.component.scss'
 })
 export class ComingSoonComponent {
-constructor(private titleService: Title, private metaService: Meta) {}
+constructor(private toastr: ToastrService,private analytics:Analytics, private titleService: Title, private metaService: Meta) {}
+
 ngOnInit(): void {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.
@@ -22,6 +25,22 @@ ngOnInit(): void {
       { name: 'keywords', content: 'coming soon, developer tools, json viewer, utilities, productivity, Onestopformatter' },
 
     ]);
+  }
+logClick() {
+  console.log("logClick")
+    const checkboxes = document.querySelectorAll('input[name="role"]') as NodeListOf<HTMLInputElement>;
+     console.log("checkboxes",checkboxes)
+    const isAnyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+     console.log("isAnyChecked",isAnyChecked)
+    if (isAnyChecked) {
+      //At least one selected — proceed
+      logEvent(this.analytics, 'button_click', {
+      screen: 'Coming-soon',
+      button: 'submit'
+    });
+    } else {
+      this.toastr.error('Please select at least one role.', 'Validation Error');
+    }
   }
 
 }
