@@ -29,16 +29,18 @@ this.metaService.addTags([
 
   }
 logClick() {
-  console.log("logClick")
     const checkboxes = document.querySelectorAll('input[name="role"]') as NodeListOf<HTMLInputElement>;
-     console.log("checkboxes",checkboxes)
     const isAnyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-     console.log("isAnyChecked",isAnyChecked)
     if (isAnyChecked) {
       //At least one selected — proceed
+      this.toastr.success('Submitted successfully!', 'Success');
       logEvent(this.analytics, 'button_click', {
       screen: 'Coming-soon',
       button: 'submit'
+    });
+     //Reset all checkboxes
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = false;
     });
     } else {
       this.toastr.error('Please select at least one role.', 'Validation Error');
