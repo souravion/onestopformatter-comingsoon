@@ -5,6 +5,6 @@ export const routes: Routes = [
     {
   path: '',
   component: ComingSoonComponent,
-  title: 'Coming Soon | Onestopformatter.dev'
+  title: 'Coming Soon | jsontoall.tools'
 }
 ];
